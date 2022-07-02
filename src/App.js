@@ -8,8 +8,8 @@ const App = () => {
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState("");
 
+    // call API
     const searchMovies = async (title) => {
-        // call API
         const response = await fetch(`${process.env.REACT_APP_API_URL}&s=${title}`);
         const data = await response.json();
 
@@ -19,6 +19,10 @@ const App = () => {
     useEffect(() => {
         searchMovies('Star Wars');
     }, []);
+
+    const handleChange = (event) => {
+        setSearch(event.target.value);
+    }
 
     return (
         <div className="app">
@@ -30,9 +34,7 @@ const App = () => {
                 <input 
                     placeholder="Enter Movie Name" 
                     value={search}
-                    onChange={(event) => {
-                        setSearch(event.target.value);
-                    }}
+                    onChange={handleChange}
                 />
                 
                 <img src={SearchIcon} alt="search" onClick={() => {
@@ -42,7 +44,7 @@ const App = () => {
             </div>
 
             {movies?.length > 0 
-                ? (
+                ? ( 
                     <div className="container">
                         {movies.map((movie, index) => {
                             return <MovieCard movie={movie} key={index} />
