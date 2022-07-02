@@ -3,15 +3,13 @@ import './App.css';
 import SearchIcon from './search.svg';
 import MovieCard from './MovieCard';
 
-const API_URL =  'http://www.omdbapi.com?apikey=cd351912';
-
 const App = () => {
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState("");
 
     const searchMovies = async (title) => {
         // call API
-        const response = await fetch(`${API_URL}&s=${title}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}&s=${title}`);
         const data = await response.json();
 
         setMovies(data.Search);
@@ -44,8 +42,8 @@ const App = () => {
             {movies?.length > 0 
                 ? (
                     <div className="container">
-                        {movies.map((movie) => {
-                            return <MovieCard movie={movie} />
+                        {movies.map((movie, index) => {
+                            return <MovieCard movie={movie} key={index} />
                         })}
                     </div>
                 ) : (
