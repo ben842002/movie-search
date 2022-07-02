@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import SearchIcon from './search.svg';
-import MovieCard from './MovieCard';
+import MovieCard from './components/MovieCard';
+import CurrentTime from './components/CurrentTime/CurrentTime';
 
 const App = () => {
     const [movies, setMovies] = useState([]);
@@ -22,6 +23,7 @@ const App = () => {
     return (
         <div className="app">
             <h1>Movie Search</h1>
+            <CurrentTime />
 
             {/* Search bar */}
             <div className="search">
